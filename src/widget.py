@@ -7,7 +7,7 @@ def get_mask_account_card(card_or_account: str) -> str:
     number = words[-1]
     description = " ".join(words[:-1])
 
-    if number.isdigit() and len(number) in [13, 16]:
+    if number.isdigit() and len(number) in [16]:
         masked_number = mask_number_card(number)
     elif number.isdigit() and len(number) >= 4:
         masked_number = mask_account_number(number)
