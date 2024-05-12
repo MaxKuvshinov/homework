@@ -2,7 +2,7 @@ from src.masks import mask_account_number, mask_number_card
 
 
 def get_mask_account_card(card_or_account: str) -> str:
-    """Функция принимает номер карты или счета и маскирует"""
+    """Функция, которая принимает номер карты или счета и маскирует"""
     words = card_or_account.split()
     number = words[-1]
     description = " ".join(words[:-1])
@@ -18,6 +18,6 @@ def get_mask_account_card(card_or_account: str) -> str:
 
 
 def get_change_date(date: str) -> str:
-    """Функция принимает дату и изменяет ее"""
+    """Функция, которая принимает дату и изменяет ее"""
     change_date = date[0:10].split("-")
     return ".".join(change_date[::-1])
