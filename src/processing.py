@@ -5,3 +5,7 @@ def get_dicts_by_state(data, state='EXECUTED'):
         if item.get("state") == state:
             filter_dict.append(item)
     return filter_dict
+
+
+def sort_by_data(data, reverse=True):
+    return sorted(data, key=lambda x: x["date"], reverse=reverse)
