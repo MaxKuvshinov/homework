@@ -1,8 +1,9 @@
 import pytest
+from src.masks import mask_account_number, mask_number_card
 
-from src.masks import mask_number_card, mask_account_number
 
-@pytest.mark.parametrize("number_card, masked_number",
+@pytest.mark.parametrize(
+    "number_card, masked_number",
     [
         ("7000792289606361", "7000 79** **** 6361"),
         ("7158300734726758", "7158 30** **** 6758"),
@@ -11,10 +12,12 @@ from src.masks import mask_number_card, mask_account_number
         ("5999414228426353", "5999 41** **** 6353"),
     ],
 )
-def test_mask_number_card(number_card, masked_number):
+def test_mask_number_card(number_card: str, masked_number: str) -> None:
     assert mask_number_card(number_card) == masked_number
 
-@pytest.mark.parametrize("account_number, masks_account",
+
+@pytest.mark.parametrize(
+    "account_number, masks_account",
     [
         ("73654108430135874305", "**4305"),
         ("64686473678894779589", "**9589"),
@@ -22,6 +25,5 @@ def test_mask_number_card(number_card, masked_number):
         ("73654108430135874305", "**4305"),
     ],
 )
-def test_mask_account_number(account_number, masks_account):
+def test_mask_account_number(account_number: str, masks_account: str) -> None:
     assert mask_account_number(account_number) == masks_account
-
