@@ -25,5 +25,7 @@ def get_mask_account_card(card_or_account: str) -> str:
 
 def get_change_date(date: str) -> str:
     """Функция, которая принимает дату и изменяет ее"""
+    result = ""
     change_date = date[0:10].split("-")
-    return ".".join(change_date[::-1])
+    result = ".".join(change_date[::-1])
+    return result
