@@ -3,7 +3,7 @@ from src.masks import mask_account_number, mask_number_card
 
 def get_mask_account_card(card_or_account: str) -> str:
     """Функция, которая принимает номер карты или счета и маскирует"""
-    result = ""
+    masking_result = ""
     words = card_or_account.split()
     number = words[-1]
     description = " ".join(words[:-1])
@@ -18,9 +18,9 @@ def get_mask_account_card(card_or_account: str) -> str:
     else:
         return card_or_account
 
-    result = f"{description} {masked_number}"
+    masking_result = f"{description} {masked_number}"
 
-    return result
+    return masking_result
 
 
 def get_change_date(date: str) -> str:

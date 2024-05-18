@@ -2,7 +2,8 @@ import pytest
 
 from src.widget import get_mask_account_card, get_change_date
 
-@pytest.mark.parametrize("card_or_account, result",
+
+@pytest.mark.parametrize("card_or_account, masking_result",
     [
         ("Maestro 1596837868705199", "Maestro 1596 83** **** 5199"),
         ("Счет 64686473678894779589", "Счет **9589"),
@@ -14,8 +15,9 @@ from src.widget import get_mask_account_card, get_change_date
         ("Счет 73654108430135874305", "Счет **4305"),
     ],
 )
-def test_get_mask_account_card(card_or_account, result):
-    assert get_mask_account_card(card_or_account) == result
+def test_get_mask_account_card(card_or_account, masking_result):
+    assert get_mask_account_card(card_or_account) == masking_result
+
 
 @pytest.mark.parametrize("date, result",
     [
