@@ -1,8 +1,10 @@
+from typing import Iterable
+
 import pytest
-from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 
-def test_filter_by_currency(transactions):
+def test_filter_by_currency(transactions: Iterable[dict]) -> None:
     usd_filter_currency = filter_by_currency(transactions, "USD")
     rub_filter_currency = filter_by_currency(transactions, "RUB")
     next(usd_filter_currency)
@@ -13,7 +15,7 @@ def test_filter_by_currency(transactions):
         "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
         "description": "Перевод со счета на счет",
         "from": "Счет 19708645243227258542",
-        "to": "Счет 75651667383060284188"
+        "to": "Счет 75651667383060284188",
     }
     assert next(rub_filter_currency) == {
         "id": 873106923,
@@ -22,12 +24,12 @@ def test_filter_by_currency(transactions):
         "operationAmount": {"amount": "43318.34", "currency": {"name": "руб.", "code": "RUB"}},
         "description": "Перевод со счета на счет",
         "from": "Счет 44812258784861134719",
-        "to": "Счет 74489636417521191160"
+        "to": "Счет 74489636417521191160",
     }
 
 
-def test_transaction_descriptions(transactions):
-    descript_transaction= transaction_descriptions(transactions)
+def test_transaction_descriptions(transactions: Iterable[dict]) -> None:
+    descript_transaction = transaction_descriptions(transactions)
     assert next(descript_transaction) == "Перевод организации"
     assert next(descript_transaction) == "Перевод со счета на счет"
     assert next(descript_transaction) == "Перевод со счета на счет"
