@@ -1,2 +1,0 @@
-my_function ok: 3
-my_function error: ZeroDivisionError. Inputs: (3, 0), {}
