@@ -1,6 +1,7 @@
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 from src.processing import get_dicts_by_state, sort_by_date
 from src.widget import get_change_date, get_mask_account_card
+from src.decorators import log
 
 print(get_mask_account_card("Visa Platinum 899092211366522"))
 
@@ -82,3 +83,19 @@ for transaction in range(5):
 
 for card_number in card_number_generator(1, 5):
     print(card_number)
+
+
+@log(filename="mylog.txt")
+def my_function(x, y):
+    return x + y
+
+
+my_function(1, 2)
+
+
+@log(filename="mylog.txt")
+def my_function(x, y):
+    return x / y
+
+
+my_function(3, 0)
