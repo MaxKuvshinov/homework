@@ -1,11 +1,12 @@
 import pytest
+from typing import Any
 
 from src.decorators import log
 
 
-def test_log_console(capsys):  # Тест при успешном вызове в консоль
+def test_log_console(capsys: Any) -> None:  # Тест при успешном вызове в консоль
     @log()
-    def add(x, y):
+    def add(x: int, y: int) -> int:
         return x + y
 
     result = add(1, 2)
@@ -16,9 +17,9 @@ def test_log_console(capsys):  # Тест при успешном вызове �
     assert captured.out == "add ok: 3\n"
 
 
-def test_log_error_console(capsys):  # Тест при вызове ошибки в консоль
+def test_log_error_console(capsys: Any) -> None:  # Тест при вызове ошибки в консоль
     @log()
-    def divide(x, y):
+    def divide(x: int, y: int) -> float:
         return x / y
 
     with pytest.raises(ZeroDivisionError):
@@ -28,12 +29,11 @@ def test_log_error_console(capsys):  # Тест при вызове ошибки
     assert "divide error: ZeroDivisionError. Inputs: (1, 0), {}\n" in captured.out
 
 
-# Тестируем логирование успешного вызова функции в файл
-def test_log_file():
+def test_log_file() -> None:  # Тест при успешном вызове функции в файл
     log_file = "mylog.txt"
 
     @log(filename=log_file)
-    def add(x, y):
+    def add(x: int, y: int) -> int:
         return x + y
 
     result = add(1, 2)
@@ -45,11 +45,11 @@ def test_log_file():
     assert log_content == "add ok: 3\n"
 
 
-def test_log_error_file():
+def test_log_error_file() -> None:  # Тест при вызове ошибки в файл
     log_file = "mylog.txt"
 
     @log(filename=log_file)
-    def divide(x, y):
+    def divide(x: int, y: int) -> float:
         return x / y
 
     with pytest.raises(ZeroDivisionError):
@@ -59,5 +59,3 @@ def test_log_error_file():
         log_content = file.read()
 
     assert "divide error: ZeroDivisionError. Inputs: (5, 0), {}\n" in log_content
-
-
