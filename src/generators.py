@@ -21,5 +21,5 @@ def card_number_generator(start: int, stop: int) -> Iterator[str]:
     """Генератор номеров банковских карт, который генерирует карты в формате XXXX XXXX XXXX XXXX."""
     for number in range(start, stop + 1):
         card_number = f"{number:016}"
-        formated_card_number = " ".join(map(lambda i: card_number[i: i + 4], range(0, 16, 4)))
+        formated_card_number = " ".join(map(lambda i: card_number[i : i + 4], range(0, 16, 4)))
         yield formated_card_number
