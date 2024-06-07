@@ -19,7 +19,7 @@ def read_transactions(file_path):
 
             return data
 
-    except json.JSONDecodeError:  # Случай ошибка декодирования JSON
+    except json.JSONDecodeError:  # Случай ошибки декодирования JSON
         return []
 
 
