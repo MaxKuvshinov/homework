@@ -1,14 +1,13 @@
 import json
 import os
-import pprint
+from typing import Any
 
 
-def read_transactions(file_path):
+def read_transactions(file_path: str) -> Any:
     """Функция принимающая на вход путь до JSON-файла
      и возвращающая список словарей с финансовыми транзакциями """
 
     if not os.path.exists(file_path):  # Проверка существования файла по указанному пути
-
         return []
 
     try:
@@ -23,11 +22,6 @@ def read_transactions(file_path):
         return []
 
 
-if __name__ == "__main__":
-    now_dir = os.path.dirname(os.path.abspath(__file__))
-
-    file_path_json = os.path.join(now_dir, '../data', 'operations.json')
-    pprint.pprint(read_transactions(file_path_json))
 
 
 
