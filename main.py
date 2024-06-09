@@ -110,17 +110,10 @@ file_path_json = os.path.join(now_dir, "data", 'operations.json')
 print(read_transactions(file_path_json))
 
 
-def main():
-    file_path = "data/operations.json"
-    transactions = read_transactions(file_path)
-    if not transactions:
-        print("Файл пустой или не существует.")
-        return
-
-    for transaction in transactions:
-        amount_in_rub = conversion_in_rub(transaction)
-        print(f"Сумма в рублях: {amount_in_rub:.2f}")
+transactions = read_transactions(file_path_json)
 
 
-if __name__ == "__main__":
-    main()
+for transaction in transactions:
+    rub_amount = conversion_in_rub(transaction)
+
+    print(f"Transaction amount in RUB: {rub_amount}")

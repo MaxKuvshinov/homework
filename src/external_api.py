@@ -27,6 +27,6 @@ def conversion_in_rub(transaction: dict) -> Any:
             data = response.json()
             return data.get("result", 0.0)
     except requests.exceptions.RequestException as e:
-        print(f"Ошибка: {e.response.status_code}")
+        print(f"Ошибка: {e}")
 
     return 0.0
