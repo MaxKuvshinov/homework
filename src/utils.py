@@ -1,9 +1,8 @@
 import json
 import os
-from typing import Any
 
 
-def read_transactions(file_path: str) -> Any:
+def read_transactions(file_path: str) -> list[dict]:
     """Функция принимающая на вход путь до JSON-файла
      и возвращающая список словарей с финансовыми транзакциями """
 
@@ -20,23 +19,3 @@ def read_transactions(file_path: str) -> Any:
 
     except json.JSONDecodeError:  # Случай ошибки декодирования JSON
         return []
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
