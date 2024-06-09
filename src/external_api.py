@@ -1,8 +1,8 @@
 import os
-import requests
-from dotenv import load_dotenv
 from typing import Any
 
+import requests
+from dotenv import load_dotenv
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
@@ -20,8 +20,7 @@ def conversion_in_rub(transaction: dict) -> Any:
 
         if currency in {"USD", "EUR"}:
             response = requests.get(
-                API_URL.format(to="RUB", from_=currency, amount=amount),
-                headers={"apikey": API_KEY}
+                API_URL.format(to="RUB", from_=currency, amount=amount), headers={"apikey": API_KEY}
             )
             response.raise_for_status()
             data = response.json()
