@@ -1,6 +1,10 @@
+import os
+
 from src.decorators import log
+from src.external_api import conversion_in_rub
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 from src.processing import get_dicts_by_state, sort_by_date
+from src.utils import read_transactions
 from src.widget import get_change_date, get_mask_account_card
 
 print(get_mask_account_card("Visa Platinum 899092211366522"))
@@ -21,6 +25,7 @@ print(get_dicts_by_state(data))
 print(get_dicts_by_state(data, state="CANCELED"))
 
 print(sort_by_date(data))
+
 
 transactions = [
     {
@@ -85,17 +90,30 @@ for card_number in card_number_generator(1, 5):
     print(card_number)
 
 
-@log(filename="mylog.txt")
-def my_function(x: int, y: int) -> int:
-    return x + y
+# @log(filename="mylog.txt")
+# def my_function(x: int, y: int) -> int:
+#     return x + y
+#
+#
+# my_function(1, 2)
+#
+#
+# @log(filename="mylog.txt")
+# def my_function_error(x: int, y: int) -> float:
+#     return x / y
+#
+#
+# my_function_error(3, 0)
+
+now_dir = os.path.dirname(os.path.abspath(__file__))
+file_path_json = os.path.join(now_dir, "data", "operations.json")
+print(read_transactions(file_path_json))
 
 
-my_function(1, 2)
+transactions = read_transactions(file_path_json)
 
 
-@log(filename="mylog.txt")
-def my_function_error(x: int, y: int) -> float:
-    return x / y
+for transaction in transactions:
+    rub_amount = conversion_in_rub(transaction)
 
-
-my_function_error(3, 0)
+    print(f"Сумма транзакции в RUB: {rub_amount}")
