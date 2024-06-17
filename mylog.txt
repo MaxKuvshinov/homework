@@ -1,0 +1,2 @@
+add ok: 3
+divide error: ZeroDivisionError. Inputs: (5, 0), {}
