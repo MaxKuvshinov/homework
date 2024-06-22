@@ -1,6 +1,5 @@
 import os
 from typing import Any
-
 import requests
 from dotenv import load_dotenv
 
@@ -24,7 +23,8 @@ def conversion_in_rub(transaction: dict) -> Any:
             )
             response.raise_for_status()
             data = response.json()
-            return data.get("result", 0.0)
+            result = data.get("result", 0.0)
+            return result
     except requests.exceptions.RequestException as e:
         print(f"Ошибка: {e}")
 

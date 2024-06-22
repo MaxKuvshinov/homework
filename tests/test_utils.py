@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
 from unittest.mock import MagicMock, mock_open, patch
-import json
+
 import pandas as pd
-
-
 from src.utils import read_transactions
 
 
@@ -29,103 +27,103 @@ class TestReadTransactions(unittest.TestCase):
 
     @patch("pandas.read_csv")
     def test_read_transactions_csv_file(self, mock_read_csv: MagicMock) -> None:
-        mock_read_csv.return_value = pd.DataFrame([
-            {
-                "id": 650703, "state": "EXECUTED", "date": "2023-09-05T11:30:32Z",
-                "amount": 16210, "currency_name": "Sol", "currency_code": "PEN",
-                "from": "Счет 58803664561298323391", "to": "Счет 39745660563456619397",
-                "description": "Перевод организации"
-            },
-            {
-                "id": 3598919, "state": "EXECUTED", "date": "2020-12-06T23:00:58Z",
-                "amount": 29740, "currency_name": "Peso", "currency_code": "COP",
-                "from": "Discover 3172601889670065", "to": "Discover 0720428384694643",
-                "description": "Перевод с карты на карту"
-            }
-        ])
+        mock_read_csv.return_value = pd.DataFrame(
+            [
+                {
+                    "id": 650703,
+                    "state": "EXECUTED",
+                    "date": "2023-09-05T11:30:32Z",
+                    "amount": 16210,
+                    "currency_name": "Sol",
+                    "currency_code": "PEN",
+                    "from": "Счет 58803664561298323391",
+                    "to": "Счет 39745660563456619397",
+                    "description": "Перевод организации",
+                },
+                {
+                    "id": 3598919,
+                    "state": "EXECUTED",
+                    "date": "2020-12-06T23:00:58Z",
+                    "amount": 29740,
+                    "currency_name": "Peso",
+                    "currency_code": "COP",
+                    "from": "Discover 3172601889670065",
+                    "to": "Discover 0720428384694643",
+                    "description": "Перевод с карты на карту",
+                },
+            ]
+        )
         transactions = read_transactions("test_file.csv")
         expected_transactions = [
             {
                 "id": 650703,
                 "state": "EXECUTED",
                 "date": "2023-09-05T11:30:32Z",
-                "operationAmount": {
-                    "amount": 16210,
-                    "currency": {
-                        "name": "Sol",
-                        "code": "PEN"
-                    }
-                },
+                "operationAmount": {"amount": 16210, "currency": {"name": "Sol", "code": "PEN"}},
                 "description": "Перевод организации",
                 "from": "Счет 58803664561298323391",
-                "to": "Счет 39745660563456619397"
+                "to": "Счет 39745660563456619397",
             },
             {
                 "id": 3598919,
                 "state": "EXECUTED",
                 "date": "2020-12-06T23:00:58Z",
-                "operationAmount": {
-                    "amount": 29740,
-                    "currency": {
-                        "name": "Peso",
-                        "code": "COP"
-                    }
-                },
+                "operationAmount": {"amount": 29740, "currency": {"name": "Peso", "code": "COP"}},
                 "description": "Перевод с карты на карту",
                 "from": "Discover 3172601889670065",
-                "to": "Discover 0720428384694643"
-            }
+                "to": "Discover 0720428384694643",
+            },
         ]
         self.assertEqual(transactions, expected_transactions)
 
     @patch("pandas.read_excel")
     def test_read_transactions_excel_file(self, mock_read_excel: MagicMock) -> None:
-        mock_read_excel.return_value = pd.DataFrame([
-            {
-                "id": 650703, "state": "EXECUTED", "date": "2023-09-05T11:30:32Z",
-                "amount": 16210, "currency_name": "Sol", "currency_code": "PEN",
-                "from": "Счет 58803664561298323391", "to": "Счет 39745660563456619397",
-                "description": "Перевод организации"
-            },
-            {
-                "id": 3598919, "state": "EXECUTED", "date": "2020-12-06T23:00:58Z",
-                "amount": 29740, "currency_name": "Peso", "currency_code": "COP",
-                "from": "Discover 3172601889670065", "to": "Discover 0720428384694643",
-                "description": "Перевод с карты на карту"
-            }
-        ])
+        mock_read_excel.return_value = pd.DataFrame(
+            [
+                {
+                    "id": 650703,
+                    "state": "EXECUTED",
+                    "date": "2023-09-05T11:30:32Z",
+                    "amount": 16210,
+                    "currency_name": "Sol",
+                    "currency_code": "PEN",
+                    "from": "Счет 58803664561298323391",
+                    "to": "Счет 39745660563456619397",
+                    "description": "Перевод организации",
+                },
+                {
+                    "id": 3598919,
+                    "state": "EXECUTED",
+                    "date": "2020-12-06T23:00:58Z",
+                    "amount": 29740,
+                    "currency_name": "Peso",
+                    "currency_code": "COP",
+                    "from": "Discover 3172601889670065",
+                    "to": "Discover 0720428384694643",
+                    "description": "Перевод с карты на карту",
+                },
+            ]
+        )
         transactions = read_transactions("test_file.xlsx")
         expected_transactions = [
             {
                 "id": 650703,
                 "state": "EXECUTED",
                 "date": "2023-09-05T11:30:32Z",
-                "operationAmount": {
-                    "amount": 16210,
-                    "currency": {
-                        "name": "Sol",
-                        "code": "PEN"
-                    }
-                },
+                "operationAmount": {"amount": 16210, "currency": {"name": "Sol", "code": "PEN"}},
                 "description": "Перевод организации",
                 "from": "Счет 58803664561298323391",
-                "to": "Счет 39745660563456619397"
+                "to": "Счет 39745660563456619397",
             },
             {
                 "id": 3598919,
                 "state": "EXECUTED",
                 "date": "2020-12-06T23:00:58Z",
-                "operationAmount": {
-                    "amount": 29740,
-                    "currency": {
-                        "name": "Peso",
-                        "code": "COP"
-                    }
-                },
+                "operationAmount": {"amount": 29740, "currency": {"name": "Peso", "code": "COP"}},
                 "description": "Перевод с карты на карту",
                 "from": "Discover 3172601889670065",
-                "to": "Discover 0720428384694643"
-            }
+                "to": "Discover 0720428384694643",
+            },
         ]
         self.assertEqual(transactions, expected_transactions)
 

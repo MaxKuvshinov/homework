@@ -1,17 +1,16 @@
-import csv
 import json
-import os
 import logging
+import os
+
 import pandas as pd
 
-
-log_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'logs')
+log_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "logs")
 os.makedirs(log_dir, exist_ok=True)
-logger = logging.getLogger('utils')
+logger = logging.getLogger("utils")
 logger.setLevel(logging.INFO)
-log_filename = os.path.join(log_dir, 'utils.log')
-file_handler = logging.FileHandler(log_filename, mode='w')
-file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+log_filename = os.path.join(log_dir, "utils.log")
+file_handler = logging.FileHandler(log_filename, mode="w")
+file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
 
@@ -46,14 +45,11 @@ def read_transactions(file_path: str) -> list[dict]:
                     "date": row["date"],
                     "operationAmount": {
                         "amount": row["amount"],
-                        "currency": {
-                            "name": row["currency_name"],
-                            "code": row["currency_code"]
-                        }
+                        "currency": {"name": row["currency_name"], "code": row["currency_code"]},
                     },
                     "description": row["description"],
                     "from": row["from"],
-                    "to": row["to"]
+                    "to": row["to"],
                 }
                 csv_transactions.append(transaction)
             logger.info(f"Успешно прочитано {len(csv_transactions)} транзакций из CSV файла")
@@ -70,14 +66,11 @@ def read_transactions(file_path: str) -> list[dict]:
                     "date": row["date"],
                     "operationAmount": {
                         "amount": row["amount"],
-                        "currency": {
-                            "name": row["currency_name"],
-                            "code": row["currency_code"]
-                        }
+                        "currency": {"name": row["currency_name"], "code": row["currency_code"]},
                     },
                     "description": row["description"],
                     "from": row["from"],
-                    "to": row["to"]
+                    "to": row["to"],
                 }
                 excel_transactions.append(transaction)
             logger.info(f"Успешно прочитано {len(excel_transactions)} транзакций из Excel файла")

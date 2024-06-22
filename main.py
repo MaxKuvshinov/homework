@@ -110,7 +110,6 @@ file_path_json = os.path.join(now_dir, "data", "transactions_excel.xlsx")
 print(read_transactions(file_path_json))
 
 
-
 transactions = read_transactions(file_path_json)
 
 
