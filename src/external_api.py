@@ -18,7 +18,7 @@ def conversion_in_rub(transaction: dict) -> Any:
         if currency == "RUB":
             return float(amount)
 
-        if currency in {"USD", "EUR"}:
+        if currency:
             response = requests.get(
                 API_URL.format(to="RUB", from_=currency, amount=amount), headers={"apikey": API_KEY}
             )
