@@ -9,12 +9,17 @@ readme = "README.md"
 python = "^3.12"
 requests = "^2.32.3"
 python-dotenv = "^1.0.1"
+pandas = "^2.2.2"
+openpyxl = "^3.1.4"
+chardet = "^5.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
 requests = "^2.31.0"
 pytest = "^8.2.0"
 pytest-cov = "^5.0.0"
+pandas-stubs = "^2.2.2.240603"
+types-requests = "^2.32.0.20240622"
 
 
 [tool.poetry.group.lint.dependencies]
