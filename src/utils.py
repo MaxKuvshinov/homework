@@ -1,6 +1,8 @@
 import json
 import logging
 import os
+import re
+from collections import Counter
 
 import pandas as pd
 
@@ -87,3 +89,30 @@ def read_transactions(file_path: str) -> list[dict]:
     except Exception as e:
         logger.error(f"Ошибка при чтении файла {file_path}: {e}")
         return []
+
+
+def search_description(transactions: list[dict], search_string: str) -> list[dict]:
+    result = []
+    pattern = re.compile(search_string, re.IGNORECASE)
+
+    for item in transactions:
+        description = item.get("description", "")
+        if isinstance(description, str) and pattern.search(description):
+            result.append(item)
+
+    return result
+
+
+def categorize_transactions(transactions: list[dict], categories: list[str]) -> dict:
+
+    categories_count = Counter()
+
+    for transaction in transactions:
+        description = transaction.get("description", "").lower()
+        for category in categories:
+            if category.lower() in description:
+                categories_count[category] += 1
+
+    return dict(categories_count)
+
+

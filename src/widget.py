@@ -3,6 +3,10 @@ from src.masks import mask_account_number, mask_number_card
 
 def get_mask_account_card(card_or_account: str) -> str:
     """Функция, которая принимает номер карты или счета и маскирует"""
+
+    if not isinstance(card_or_account, str):
+        return card_or_account
+
     masking_result = ""
     words = card_or_account.split()
     number = words[-1]
