@@ -1,6 +1,5 @@
 import os
 from typing import Any
-
 import requests
 from dotenv import load_dotenv
 
@@ -18,13 +17,14 @@ def conversion_in_rub(transaction: dict) -> Any:
         if currency == "RUB":
             return float(amount)
 
-        if currency in {"USD", "EUR"}:
+        if currency:
             response = requests.get(
                 API_URL.format(to="RUB", from_=currency, amount=amount), headers={"apikey": API_KEY}
             )
             response.raise_for_status()
             data = response.json()
-            return data.get("result", 0.0)
+            result = data.get("result", 0.0)
+            return result
     except requests.exceptions.RequestException as e:
         print(f"Ошибка: {e}")
 

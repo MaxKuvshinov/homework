@@ -106,7 +106,7 @@ for card_number in card_number_generator(1, 5):
 # my_function_error(3, 0)
 
 now_dir = os.path.dirname(os.path.abspath(__file__))
-file_path_json = os.path.join(now_dir, "data", "operations.json")
+file_path_json = os.path.join(now_dir, "data", "transactions_excel.xlsx")
 print(read_transactions(file_path_json))
 
 
