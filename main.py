@@ -3,12 +3,10 @@ from src.utils import read_transactions, search_description
 from src.widget import get_change_date, get_mask_account_card
 
 
-def main():
-    file_paths = {
-        "1": "data/operations.json",
-        "2": "data/transactions.csv",
-        "3": "data/transactions_excel.xlsx"
-    }
+def main() -> None:
+    """Функция, которая отвечает за основную логику проекта и связывает функциональности между собой"""
+
+    file_paths = {"1": "data/operations.json", "2": "data/transactions.csv", "3": "data/transactions_excel.xlsx"}
 
     print("Привет! Добро пожаловать в программу работы с банковскими транзакциями.")
 
@@ -28,15 +26,17 @@ def main():
     available_statuses = ["EXECUTED", "CANCELED", "PENDING"]
 
     while True:
-        print("""Введите статус, по которому необходимо выполнить фильтрацию. 
-Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING: """)
+        print(
+            """Введите статус, по которому необходимо выполнить фильтрацию. 
+    Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING: """
+        )
         status = input("Пользователь: ").strip().upper()
         if status in available_statuses:
             break
         else:
-            print(f"Статус операции \"{status}\" недоступен. Попробуйте снова.")
+            print(f'Статус операции "{status}" недоступен. Попробуйте снова.')
     filtered_transactions = get_dicts_by_state(transactions, status)
-    print(f"Операции отфильтрованы по статусу \"{status}\"")
+    print(f'Операции отфильтрованы по статусу "{status}"')
 
     while True:
         print("Отсортировать операции по дате? Да/Нет:")
@@ -64,8 +64,11 @@ def main():
         else:
             print("Неверный выбор. Попробуйте снова.")
     if user_input == "да":
-        filtered_transactions = [item for item in filtered_transactions if
-                                 item .get("operationAmount", {}).get("currency", {}).get("code") == "RUB"]
+        filtered_transactions = [
+            item
+            for item in filtered_transactions
+            if item.get("operationAmount", {}).get("currency", {}).get("code") == "RUB"
+        ]
 
     while True:
         print("Отфильтровать список транзакций по определенному слову в описании? Да/Нет: ")
@@ -101,7 +104,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-

@@ -92,6 +92,9 @@ def read_transactions(file_path: str) -> list[dict]:
 
 
 def search_description(transactions: list[dict], search_string: str) -> list[dict]:
+    """Функция, принимает список словарей с данными о банковских операциях и строку поиска,
+    а возвращать список словарей, у которых в описании есть данная строка."""
+
     result = []
     pattern = re.compile(search_string, re.IGNORECASE)
 
@@ -104,8 +107,11 @@ def search_description(transactions: list[dict], search_string: str) -> list[dic
 
 
 def categorize_transactions(transactions: list[dict], categories: list[str]) -> dict:
+    """Функцию, принимает список словарей с данными о банковских операциях и список категорий операций,
+    а возвращать словарь, в котором ключи — это названия категорий,
+    а значения — это количество операций в каждой категории."""
 
-    categories_count = Counter()
+    categories_count: Counter[str] = Counter()
 
     for transaction in transactions:
         description = transaction.get("description", "").lower()
@@ -114,5 +120,3 @@ def categorize_transactions(transactions: list[dict], categories: list[str]) -> 
                 categories_count[category] += 1
 
     return dict(categories_count)
-
-
