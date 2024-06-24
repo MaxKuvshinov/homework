@@ -27,8 +27,8 @@ def main() -> None:
 
     while True:
         print(
-            """Введите статус, по которому необходимо выполнить фильтрацию. 
-    Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING: """
+            """Введите статус, по которому необходимо выполнить фильтрацию.
+Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING:"""
         )
         status = input("Пользователь: ").strip().upper()
         if status in available_statuses:
